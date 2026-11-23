@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101512">
+  <meta name="description" content="تنزيل Nimbus Engine Android Runtime. محرك ألعاب C++ مع عارض OpenGL ES لأجهزة Android.">
+  <title>Nimbus Engine — Downloads</title>
+  <style>
+    :root{color-scheme:dark;--bg:#101512;--surface:#191f1b;--line:#303a33;--muted:#aab5ad;--text:#f2f6f2;--accent:#c9f36d;--accent-ink:#17200e}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 75% -10%,#2c3c2e 0,transparent 42%),var(--bg);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--text)}
+    main{width:min(900px,100%);margin:auto;padding:24px 20px 56px}.top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding:12px 0 22px}.brand{display:flex;align-items:center;gap:12px;font-weight:850;letter-spacing:.08em}.mark{width:40px;height:40px;border:1px solid #68794c;border-radius:12px;display:grid;place-items:center;color:var(--accent);font-size:21px;font-weight:900}.version{font-size:12px;color:var(--muted);border:1px solid var(--line);padding:7px 12px;border-radius:30px}.hero{padding:76px 0 40px}.eyebrow{font-size:12px;letter-spacing:.13em;color:var(--accent);font-weight:800}.hero h1{font-size:clamp(38px,8vw,70px);line-height:1.05;letter-spacing:-.055em;margin:18px 0}.hero h1 span{color:var(--accent)}.hero p{max-width:620px;color:var(--muted);font-size:16px;line-height:1.9;margin:0}.cards{display:grid;grid-template-columns:1fr 1fr;gap:14px}.card{background:linear-gradient(145deg,#202822,#171d19);border:1px solid var(--line);border-radius:18px;padding:24px;min-height:240px;display:flex;flex-direction:column}.icon{font-size:27px;margin-bottom:18px}.card h2{font-size:20px;margin:0 0 8px}.card p{font-size:14px;color:var(--muted);line-height:1.8;margin:0 0 20px}.button{display:block;text-align:center;text-decoration:none;background:var(--accent);color:var(--accent-ink);font-weight:850;padding:13px 16px;border-radius:11px;margin-top:auto}.button.disabled{background:#343d36;color:#aab5ad;cursor:not-allowed}.meta{font-size:11px;color:var(--muted);margin-top:10px}.notice{margin-top:22px;border-right:3px solid var(--accent);padding:12px 15px;background:#1e251f;border-radius:10px;color:#c8d1ca;font-size:13px;line-height:1.8}.footer{margin-top:40px;border-top:1px solid var(--line);padding-top:20px;color:#879289;font-size:12px;line-height:1.8}.status{display:inline-flex;align-items:center;gap:7px;color:#cdeca0;font-size:12px;margin-top:18px}.dot{width:7px;height:7px;border-radius:50%;background:var(--accent)}
+    @media(max-width:620px){main{padding:16px 16px 40px}.hero{padding:54px 0 32px}.cards{grid-template-columns:1fr}.card{min-height:215px}.version{font-size:11px}}
+  </style>
+</head>
+<body>
+<main>
+  <header class="top">
+    <div class="brand"><div class="mark">N</div><span>NIMBUS ENGINE</span></div>
+    <span class="version">ANDROID · ARM64</span>
+  </header>
+  <section class="hero">
+    <div class="eyebrow">ENGINE RELEASE / 0.2</div>
+    <h1>ابنِ لعبتك.<br><span>شغّلها على Android.</span></h1>
+    <p>نسخة تشغيل أولية من Nimbus Engine مبنية بـ C++20 وتستخدم OpenGL ES 3 لعرض مشهد تجريبي على أجهزة Android المتوافقة.</p>
+    <div class="status"><span class="dot"></span> إصدار Android Runtime</div>
+  </section>
+  <section class="cards" aria-label="التنزيلات">
+    <article class="card">
+      <div class="icon">⬇</div>
+      <h2>Android APK</h2>
+      <p>حزمة تثبيت ARM64. تتضمن المحرك الأصلي وواجهة Android ومشهدًا تجريبيًا للتحقق من تشغيل العارض.</p>
+      <a class="button" href="./downloads/NimbusEngine.apk" download>تنزيل Nimbus Engine APK</a>
+      <div class="meta">Android 7.0 أو أحدث · ARM64 · Debug build</div>
+    </article>
+    <article class="card">
+      <div class="icon">⚙</div>
+      <h2>مكونات النسخة</h2>
+      <p>محرك C++20 الأصلي، وواجهة Android Native، ونافذة OpenGL ES 3، مع دورة حياة إيقاف واستئناف مرتبطة بسطح العرض.</p>
+      <div class="meta" style="margin-top:auto">ARM64 · API 24+ · OpenGL ES 3.0</div>
+    </article>
+  </section>
+  <div class="notice">ملاحظة: هذا الإصدار Runtime تجريبي للمحرك، وليس محرر ألعاب مرئيًا كاملًا. قد يتطلب Android السماح بتثبيت التطبيقات من هذا المصدر.</div>
+  <footer class="footer"><strong>Nimbus Engine</strong> · مشروع محرك ألعاب مستقل. يتم نشر ملف APK فقط بعد نجاح البناء والتحقق من وجود الحزمة.</footer>
+</main>
+</body>
+</html>

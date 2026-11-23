@@ -1,0 +1,33 @@
+NIMBUS ENGINE — HONEST DELIVERY & VERIFICATION STATUS
+======================================================
+
+1. VERIFIED (Executed & Passed in this Environment)
+--------------------------------------------------
+- Native C++20 Debug Build & Test Suite (`make -j2 all test examples`):
+  * Zero compiler warnings under `-std=c++20 -Wall -Wextra -Wpedantic -Werror` (GCC 12.2.0).
+  * `nimbus_tests`: RESULT: PASS (0 failures; 143 engine checks + 140 integration checks = 283 total checks).
+  * `libluajit-5.1.so.2` dynamic runtime initialized (`sandbox=on`), `os`/`io` blocked, instruction watchdog aborts infinite loops cleanly.
+- Native C++20 Release Build (`BUILD=release`, `-O2 -DNDEBUG`):
+  * `nimbus_tests`: RESULT: PASS (0 failures; 283 / 283 checks).
+  * `nimbus_example_fps_arena`: PASS (exit 0; frames=45 hits=39 particles=936 rayHit=1 droneX=4.50 sceneBytes=866).
+  * `nimbus_example_ai_patrol`: PASS (exit 0; navTris=128 waypoints=5 reached=4 finalPos=(4.50,0.00,4.50) netSnaps=1).
+- Sanitizers (`SANITIZE=asan` & `SANITIZE=tsan`):
+  * ASan + UBSan (`-fsanitize=address,undefined`): 283 / 283 checks PASS, 0 leaks / memory / UB errors.
+  * TSan (`-fsanitize=thread`): 283 / 283 checks PASS, 0 data races.
+- MCP Stdio Server (`./build/debug-none/nimbus_mcp_server --workspace ...`):
+  * Verified `initialize`, `tools/list` (39 schema-defined tools), and workspace path-traversal rejection (`isError: true`).
+- Nimbus Studio Web/PWA + Express MCP Bridge (`server.ts`, `src/`):
+  * `tsc --noEmit` (`npm run lint`) PASS, Vite production build (`npm run build`) PASS.
+  * Live Express production HTTP API E2E test verified: `/`, `/manifest.webmanifest`, `/sw.js`, `/api/status`, `/api/tools` (39 tools), `/api/projects/new`, `/api/entity/create`, `/api/entity/transform`, `/api/component/add`, `/api/scene/entities`, `/api/playback`, `/api/visual-script/node`, `/api/visual-script/edge`, `/api/visual-script/execute`, `/api/visual-script/lua`, `/api/script/run`, `/api/assets/import-obj`, `/api/projects/export`, `/api/tests/run` (0 failures), `/api/logs`.
+
+2. PARTIALLY VERIFIED
+---------------------
+- Browser WebGL2 3D Viewport & Mobile Touch Gestures (`src/components/Viewport3D.tsx`):
+  * Strict TypeScript typechecking, production Vite bundling, and Express serving verified cleanly; live pixel/WebGL2 GPU rendering in a headless browser is unverified because Chromium/Playwright is not installed in this container.
+
+3. NOT VERIFIED (Environment Toolchain Missing Locally)
+-------------------------------------------------------
+- Android Dual-Flavor APK Compilation (`:app:assembleRuntimeDebug`, `:app:assembleEditorDebug`):
+  * Android SDK, NDK, JDK, Gradle, and `cmake` are not installed locally (`apt-get` offline). Validated by inspection and configured in `.github/workflows/android-apk.yml`.
+- Hardware GLES3 / Vulkan GPU Rendering & OpenSL ES Device Audio Output:
+  * System EGL/GLES dev headers and Android hardware/emulator (`adb`) are unavailable in this container; headless software verification and `GlesDevice` static source compilation paths await an Android SDK/NDK or GLES host.

@@ -1,0 +1,36 @@
+Nimbus Engine Android packaging — current delivery state
+
+IMPLEMENTED IN SOURCE
+- Android Gradle application module (arm64-v8a, API 24+, compile/target SDK 35).
+- Native Java Activity + SurfaceView lifecycle integration.
+- JNI bridge that owns an ANativeWindow reference and runs Nimbus Engine on a
+  dedicated render thread.
+- OpenGL ES 3 EGL surface/context initialization through the existing RHI.
+- A small indexed demo mesh rendered through Nimbus Renderer.
+- Lua is optional; native gameplay can initialize and run with scripting disabled.
+- Android GitHub Actions workflow builds/validates the APK and uploads it as an
+  Actions artifact.
+- Optional Vercel deployment of the APK plus website when VERCEL_TOKEN is set.
+
+VALIDATION PERFORMED HERE
+- AndroidManifest.xml parses as valid XML.
+- Android CMake source root resolves to the repository root.
+- Linux native-only engine build completed with warnings-as-errors.
+- No-Lua native runtime smoke test passed (initialize, play, tick, pause, step,
+  shutdown).
+- Workflow YAML was parsed; note PyYAML 1.1 displays the YAML key "on" as a
+  boolean internally, but the workflow file uses the conventional GitHub syntax.
+
+NOT VERIFIED / NOT AVAILABLE
+- No installable APK was produced in this workspace.
+- Android SDK, NDK, Gradle, android.jar and aapt are absent.
+- Android SDK downloads could not resolve from this environment.
+- Vercel Sandbox provisioning failed with API bad_request.
+- Connected GitHub account lists no repositories, so GitHub Actions could not
+  be triggered from here.
+- No physical Android installation/GPU/lifecycle test was possible.
+
+IMPORTANT
+Do not label a ZIP or source package as an APK. The download link must only be
+published after android/app/build/outputs/apk/debug/app-debug.apk exists and the
+CI verification step succeeds.

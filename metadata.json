@@ -1,0 +1,6 @@
+{
+  "name": "Nimbus Studio",
+  "description": "Mobile-first 3D game engine studio and live runtime workbench powered by the C++20 Nimbus Engine.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

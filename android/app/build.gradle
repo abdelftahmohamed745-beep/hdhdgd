@@ -1,0 +1,94 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.nimbus.engine'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId 'com.nimbus.engine'
+        minSdk 24
+        targetSdk 35
+        versionCode 3
+        versionName '0.3.0'
+
+        ndk {
+            abiFilters 'arm64-v8a'
+        }
+
+        externalNativeBuild {
+            cmake {
+                cppFlags '-std=c++20 -fexceptions -frtti'
+                arguments '-DANDROID_STL=c++_shared',
+                          '-DNIMBUS_ANDROID=ON',
+                          '-DNIMBUS_BUILD_TESTS=OFF',
+                          '-DNIMBUS_ENABLE_LUA=OFF',
+                          '-DNIMBUS_ENABLE_VULKAN=OFF',
+                          '-DNIMBUS_ENABLE_GLES=ON',
+                          '-DCMAKE_POSITION_INDEPENDENT_CODE=ON'
+            }
+        }
+    }
+
+    flavorDimensions 'mode'
+    productFlavors {
+        runtime {
+            dimension 'mode'
+            applicationId 'com.nimbus.engine'
+            manifestPlaceholders = [appLabel: 'Nimbus Engine']
+            buildConfigField 'boolean', 'IS_EDITOR', 'false'
+            externalNativeBuild {
+                cmake {
+                    arguments '-DNIMBUS_BUILD_EDITOR=OFF'
+                }
+            }
+        }
+        editor {
+            dimension 'mode'
+            applicationId 'com.nimbus.editor'
+            manifestPlaceholders = [appLabel: 'Nimbus Studio']
+            buildConfigField 'boolean', 'IS_EDITOR', 'true'
+            externalNativeBuild {
+                cmake {
+                    arguments '-DNIMBUS_BUILD_EDITOR=ON'
+                }
+            }
+        }
+    }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
+    ndkVersion '27.2.12479018'
+
+    externalNativeBuild {
+        cmake {
+            path file('src/main/cpp/CMakeLists.txt')
+            version '3.22.1'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+            jniDebuggable true
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    packaging {
+        jniLibs {
+            useLegacyPackaging = false
+        }
+    }
+}
